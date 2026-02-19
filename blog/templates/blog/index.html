@@ -1,0 +1,22 @@
+{% extends 'share/base.html' %}
+{% load blog_tags %}
+{% block title %}
+My Blog
+{% endblock %}
+
+{% block content %}
+<h2>آمار سایت</h2>
+    <p>تعداد پست ها: {% total_posts %}</p>
+    <p>تعداد کامنت ها: {% total_comment %}</p>
+    <p>تاریخ آخرین پست: {% last_post_date %}</p>
+    <h2>محبوب ترین پست ها</h2>
+    {% most_popular_post 3 as mp %}
+    {% for post in mp %}
+        <br>
+        {% with post.comments_count as cc %}
+        <a href="{{ post.get_absolute_url }}">{{ post.title }} with: {{ cc }} comment{{ cc|pluralize }}</a>
+        {% endwith %}
+    {% endfor %}
+
+    <p>{% latest_posts %}</p>
+{% endblock %}

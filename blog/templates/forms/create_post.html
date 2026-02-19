@@ -1,0 +1,43 @@
+{% extends 'share/base.html' %}
+
+{% block title %}
+    create post
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" id="create-post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <div id="image-container">
+
+        </div>
+        <a href="#" id="add-image">add image</a>
+        <input type="submit" value="ثبت">
+    </form>
+
+
+{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let i = 0;
+        const imageContainer = document.getElementById('image-container');
+        var add_image = document.getElementById('add-image')
+
+        add_image.addEventListener('click', (e) => {
+            e.preventDefault();
+            i++;
+            const new_input=document.createElement('input');
+            new_input.type='file';
+            new_input.name=`image_file_${i}`;
+            new_input.accept = 'image/*';
+            imageContainer.appendChild(new_input)
+            imageContainer.appendChild(document.createElement('br'))
+        });
+
+    </script>
+{% endblock %}

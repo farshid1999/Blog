@@ -1,0 +1,21 @@
+{% extends 'share/base.html' %}
+{% block title %}
+    search result
+{% endblock %}
+{% block content %}
+    {% if query %}
+        {{ result.count }} نتیجه برای نتیجه جستجو برای {{ query }}:
+        <br>
+        {% for post in result %}
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            <p>
+                {{ post.description }}
+            </p>
+        {% empty %}
+            جستجو نتیجه ای نداشت
+        {% endfor %}
+
+
+
+    {% endif %}
+{% endblock %}

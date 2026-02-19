@@ -1,0 +1,40 @@
+{% extends 'share/base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block content %}
+    <style>
+    .title-link{
+        text-decoration: none;
+        color: silver;
+    }
+    </style>
+    <ol style="--length:{{ posts.paginator.count }}" role="list">
+        {% for post in posts %}
+            <li style="--i:{{ forloop.counter }}">
+                <p>
+                    <img style="float: right" src="{{ post.images_post.first.image_file.url }}" alt="{{ post.images_post.first.title }}">
+                <h3>
+                    <a href="{% url 'post_detail_page' post.slug %}" class="title-link">{{ post.title }}</a>
+                </h3>
+                </p>
+            <p>{{ post.description|truncatewords:5 }}</p>
+            </li>
+        {% endfor %}
+    </ol>
+    {% include 'partials/pagination.html' with page=posts %}
+    {% include 'partials/footer.html' %}
+{% endblock %}
+

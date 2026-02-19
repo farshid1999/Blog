@@ -1,0 +1,17 @@
+<form action="{% url 'post_search' %}" method="get">
+    <input type="text" name="query" required>
+    <input type="submit" value="جستجو">
+    {#    <p>#}
+    {#        {% if request.user.is_authenticaited %}#}
+    {#        <a href="{% url 'profile' %}">پروفایل</a>#}
+    {#        {% endif %}#}
+    {#    </p>#}
+    {% if request.user.is_authenticated %}
+        <div><a href="{% url 'profile' %}">{{ request.user.username }}</a></div>
+        <div><a href="{% url 'account_edit' %}">ویرایش پروفایل</a></div>
+        <div><a href="{% url 'logout' %}">خروج</a></div>
+    {% else %}
+        <div><a href="{% url 'login' %}">ورود</a></div>
+    {% endif %}
+    <div><a href="{% url 'register' %}">ثبت نام</a></div>
+</form>

@@ -1,0 +1,19 @@
+{% extends 'share/base.html' %}
+{% load static %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block content %}
+<h1>ورود کاربر</h1>
+    <p>نام کاربری و رمز عبور را وارد کنید</p>
+    <form action="" method="post">
+    {% csrf_token %}
+        {{ form }}
+{#        <input type="hidden" name="next" value="{{ next }}">#}
+        <input type="submit" value="ورود">
+    </form>
+    <p><a href="{% url 'register' %}">ثبت نام</a></p>
+    <a href="{% url 'password_reset' %}">فراموشی رمز عبور</a>
+{% endblock %}

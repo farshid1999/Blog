@@ -1,0 +1,28 @@
+{% extends 'share/base.html' %}
+
+{% block title %}
+    profile
+{% endblock %}
+
+{% block content %}
+    <h2>صفحه شخصی {{ user.username }}</h2>
+    <br>
+    <a href="{% url 'password_change' %}">تغییر کلمه عبور</a>
+    <p><a href="{% url 'creat_post' %}">ایجاد پست جدید</a></p>
+    <table>
+        <tr>
+            <th>ردیف</th>
+            <th>عنوان</th>
+            <th>تاریخ انتشار</th>
+        </tr>
+        {% for post in posts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
+                <td>{{ post.publish }}</td>
+                <td><a href="{% url 'edit_post' post.id %}">ویرایش</a></td>
+                <td><a href="{% url 'delete_post' post.id %}">حذف</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

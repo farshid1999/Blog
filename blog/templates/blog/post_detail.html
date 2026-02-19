@@ -1,0 +1,40 @@
+{% extends 'share/base.html' %}
+{% load jformat %}
+
+{% block title %}
+detail
+{% endblock %}
+
+{% block content %}
+<h2>
+        {{ post.title }} from <a href="{% url 'author' post.author.id %}">{{ post.author }}</a>
+    </h2>
+    {% for image in post.images_post.all %}
+        <img width="150px" height="150px" src="{{ image.image_file.url }}" alt="">
+    {% endfor %}
+    
+    <p>
+        {{ post.description|linebreaks }}
+    </p>
+    <p>{{ post.publish|jformat:"%Y / %m" }}</p>
+    {#    <p>{{ new_date|date:'Y/m(H:i)' }}</p>#}
+    <div>
+    {% with comments.count as cm_count %}
+    {{ cm_count }} comment {{ cm_count|pluralize }}
+    {% endwith %}
+    </div>
+    <div>
+    {% for comment in comments %}
+        {{ comment.body|linebreaks }}
+        <br>
+        By {{ comment.name }} at {{ comment.publish }}
+    {% empty %}
+        هنوز دیدگاهی برای این پست ثبت نشده
+    {% endfor %}
+    </div>
+    <form method="post" action="{% url 'post_comment' post.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="افزودن دیدگاه">
+    </form>
+{% endblock %}

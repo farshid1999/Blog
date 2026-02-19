@@ -1,0 +1,15 @@
+{% extends 'share/base.html' %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block content %}
+	<h1>ثبت نام</h1>
+    <p></p>
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+        <input type="submit" value="ثبت نام">
+    </form>
+{% endblock %}
